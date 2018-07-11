@@ -1,0 +1,11 @@
+D:\Duyen\Project\App\MapperAsync\MapperAsync\bin\Debug\MapperAsync.exe.config
+D:\Duyen\Project\App\MapperAsync\MapperAsync\bin\Debug\MapperAsync.exe
+D:\Duyen\Project\App\MapperAsync\MapperAsync\bin\Debug\MapperAsync.pdb
+D:\Duyen\Project\App\MapperAsync\MapperAsync\bin\Debug\Dapper.dll
+D:\Duyen\Project\App\MapperAsync\MapperAsync\bin\Debug\Dapper.xml
+D:\Duyen\Project\App\MapperAsync\MapperAsync\obj\Debug\MapperAsync.csprojResolveAssemblyReference.cache
+D:\Duyen\Project\App\MapperAsync\MapperAsync\obj\Debug\MapperAsync.Form1.resources
+D:\Duyen\Project\App\MapperAsync\MapperAsync\obj\Debug\MapperAsync.Properties.Resources.resources
+D:\Duyen\Project\App\MapperAsync\MapperAsync\obj\Debug\MapperAsync.csproj.GenerateResource.Cache
+D:\Duyen\Project\App\MapperAsync\MapperAsync\obj\Debug\MapperAsync.exe
+D:\Duyen\Project\App\MapperAsync\MapperAsync\obj\Debug\MapperAsync.pdb

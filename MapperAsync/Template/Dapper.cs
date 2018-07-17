@@ -9,35 +9,38 @@ namespace MapperAsync.Template
     public class Dapper
     {
 
-public int ID { get; set; }
+        public int ID { get; set; }
 
         void constructor() { }
 
-        public virtual async Task<IEnumerable<Dapper>> Select(int ID = 0, string listcolumn = "")
+        public virtual async Task<IEnumerable<Dapper>> Select(int ID = 0, string listcolumn = "*")
         {
-            var sql = "SELECT * FROM Dapper ";
-            if (!string.IsNullOrEmpty(listcolumn)) sql = sql.Replace("*", listcolumn);
+            var sql = string.Format(@"SELECT {0} FROM Dapper ", listcolumn);
             if (ID == 0)
             {
-                var row = await DBManager<Dapper>.ExecuteReader(sql);
-                return row;
+                return await DBManager<Dapper>.ExecuteReader(sql);
             }
             sql += " WHERE ID=@ID";
             return await DBManager<Dapper>.ExecuteReader(sql, new { ID = ID });
         }
 
-
-        public virtual async Task<IEnumerable<Dapper>> SelectPaging(int start = 0, int end = 10, string query = "", string listcolumn = "")
+        public virtual async Task<Dapper> FindById(int ID = 0, string listcolumn = "*")
         {
-            var sql = "SELECT * FROM(SELECT ROW_NUMBER() OVER (order by name) AS ROWNUM, * FROM Dapper WHERE 1=1 " + query + ") as u  WHERE   RowNum BETWEEN @start AND @end ORDER BY RowNum;";
-            if (!string.IsNullOrEmpty(listcolumn)) sql = sql.Replace("*", listcolumn);
+            var sql = string.Format(@"SELECT {0} FROM Dapper WHERE ID=@ID", listcolumn);
+            return await DBManager<Dapper>.FindById(sql, ID);
+        }
 
+        public virtual async Task<IEnumerable<Dapper>> SelectPaging(int start = 0, int end = 10, string query = "", string listcolumn = "*")
+        {
+            var sql = string.Format(@"
+SELECT {0} FROM(SELECT ROW_NUMBER() OVER (order by id) AS ROWNUM, {1} FROM Dapper WHERE 1=1 {2}) as u  
+WHERE   RowNum BETWEEN @start AND @end ORDER BY RowNum;", listcolumn, listcolumn, query);
             return await DBManager<Dapper>.ExecuteReader(sql, new { start = start, end = end });
         }
 
         public virtual async Task<int> GetCount(string query = "")
         {
-            var sql = "SELECT COUNT(1) AS CNT FROM Dapper WHERE 1=1 " + query;
+            var sql = "SELECT COUNT(1) FROM Dapper WHERE 1=1 " + query;
             var result = await DBManager<Dapper>.ExecuteScalar(sql);
             return Convert.ToInt32(result);
         }

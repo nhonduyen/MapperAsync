@@ -49,11 +49,11 @@ namespace MapperAsync
             }
         }
 
-        public static async Task<IEnumerable<TEntity>> FindById(string sql, int id, CommandType type = CommandType.Text)
+        public static async Task<TEntity> FindById(string sql, int id, CommandType type = CommandType.Text)
         {
             using (IDbConnection db = GetOpenConnection())
             {
-                return await db.QueryAsync<TEntity>(sql, new { ID = id }, commandType: type);
+                return await db.QueryFirstOrDefaultAsync<TEntity>(sql, new { ID = id }, commandType: type);
             }
         }
 

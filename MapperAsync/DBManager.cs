@@ -40,6 +40,14 @@ namespace MapperAsync
             }
         }
 
+        public static async Task<dynamic> QueryMultiple(string sql, object param = null, CommandType type = CommandType.Text)
+        {
+            using (IDbConnection db = GetOpenConnection())
+            {
+                return await db.QueryMultipleAsync(sql, param);
+            }
+        }
+
         // use when get id after inserted
         public static int ExecuteSingle(string sql, object param = null, CommandType type = CommandType.Text)
         {

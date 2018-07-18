@@ -9,7 +9,7 @@ namespace MapperAsync.Template
     public class Dapper
     {
 
-        public int ID { get; set; }
+public int ID { get; set; }
 
         void constructor() { }
 
@@ -26,7 +26,7 @@ namespace MapperAsync.Template
 
         public virtual async Task<Dapper> FindById(int ID = 0, string listcolumn = "*")
         {
-            var sql = string.Format(@"SELECT {0} FROM Dapper WHERE ID=@ID", listcolumn);
+            var sql = string.Format(@"SELECT TOP 1 {0} FROM Dapper WHERE ID=@ID", listcolumn);
             return await DBManager<Dapper>.FindById(sql, ID);
         }
 

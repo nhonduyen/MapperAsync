@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace MapperAsync
 {
@@ -100,6 +101,7 @@ namespace MapperAsync
                 txtResult.Text += "Mapping " + tbname + ".cs success" + System.Environment.NewLine;
             }
             MessageBox.Show("Mapping done!");
+            Process.Start(location);
         }
 
         private async void btnDapper_Click(object sender, EventArgs e)
@@ -160,6 +162,7 @@ namespace MapperAsync
                 txtResult.Text += "Mapping " + tbname + ".cs success" + System.Environment.NewLine;
             }
             MessageBox.Show("Mapping done!");
+            Process.Start(location);
         }
     }
 }

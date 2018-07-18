@@ -31,13 +31,16 @@ namespace MapperAsync
                 }
             }
             insert = insert.Remove(insert.Length - 1) + ") VALUES(" + tempInsert.Remove(tempInsert.Length - 1) + ")";
-
+            parameter1 = parameter1.Remove(parameter1.Length - 1);
             string insertFunc = "public virtual async Task<int> Insert(" + parameter.Remove(parameter.Length - 1) + ")" + System.Environment.NewLine;
             insertFunc += "        {" + System.Environment.NewLine;
             insertFunc += "            var sql = \"" + insert.Remove(insert.Length - 1) + ")\";" + System.Environment.NewLine;
-            insertFunc += "            return await DBManager<" + table + ">.Execute(sql, " + parameter1.Remove(parameter1.Length - 1) + "});" + System.Environment.NewLine;
+            insertFunc += "            return await DBManager<" + table + ">.Execute(sql, " + parameter1 + "});" + System.Environment.NewLine;
             insertFunc += "        }" + System.Environment.NewLine;
-            return insertFunc;
+            var insert2 = insertFunc.Replace(parameter.Remove(parameter.Length - 1), table + " " + table);
+
+            insert2 = insert2.Replace(parameter1, table);
+            return insertFunc + insert2;
         }
 
         public string MakeUpdateFunc(string table, DataTable columns)
@@ -66,7 +69,9 @@ namespace MapperAsync
             UpdateFunc += System.Environment.NewLine;
             UpdateFunc += "            return await DBManager<" + table + ">.Execute(sql, " + parameter1.Remove(parameter1.Length - 1) + "});" + System.Environment.NewLine;
             UpdateFunc += "        }" + System.Environment.NewLine;
-            return UpdateFunc;
+            var update2 = UpdateFunc.Replace(parameter.Remove(parameter.Length - 2), table + " " + table);
+            update2 = update2.Replace(parameter1.Remove(parameter1.Length - 1), table);
+            return UpdateFunc + update2;
         }
 
 
